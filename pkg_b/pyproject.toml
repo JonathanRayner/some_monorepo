@@ -3,6 +3,7 @@ name = "pkg-b"
 version = "0.1.0"
 description = ""
 authors = ["Jonathan Rayner <jonathan.j.rayner@gmail.com>"]
+packages = [{ include = "pkg_b"}]
 
 [tool.poetry.dependencies]
 python = ">=3.11 <3.13"
