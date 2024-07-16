@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "pkg-a"
+name = "pkg-slow"
 version = "0.1.0"
 description = ""
 authors = ["Jonathan Rayner <jonathan.j.rayner@gmail.com>"]
