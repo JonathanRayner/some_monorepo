@@ -1,13 +1,13 @@
 [tool.poetry]
-name = "pkg-a"
+name = "pkg-b"
 version = "0.1.0"
 description = ""
 authors = ["Jonathan Rayner <jonathan.j.rayner@gmail.com>"]
-packages = [{ include = "pkg_a"}]
+packages = [{ include = "pkg_fast"}]
 
 [tool.poetry.dependencies]
 python = ">=3.11 <3.13"
-requests = "^2.32.3"
+tqdm = "^4.66.4"
 
 
 [build-system]
