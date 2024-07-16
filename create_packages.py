@@ -1,9 +1,12 @@
 from pathlib import Path
 import subprocess
 import argparse
+from create_random_file import create_random_file
 
 
-def create_folder_structure(num_folders: int) -> None:
+def create_folder_structure(
+    num_folders: int, random_file_size_mb: int, random_file_name: str
+) -> None:
     for i in range(1, num_folders + 1):
         package_name = f"pkg_{i}"
         path = Path(package_name)
@@ -43,6 +46,9 @@ build-backend = "poetry.core.masonry.api"
 """
         )
 
+        # Create random file
+        create_random_file(path=path / random_file_name, size_mb=random_file_size_mb)
+
 
 def run_poetry_lock(num_folders: int) -> None:
     for i in range(1, num_folders + 1):
@@ -63,13 +69,24 @@ def main():
     parser.add_argument(
         "-n", "--num_folders", type=int, help="Number of folders to create"
     )
+    parser.add_argument(
+        "-s", "--size", default=50, type=int, help="Size of the file in MB"
+    )
+    parser.add_argument(
+        "-o",
+        "--output",
+        default="random_file.bin",
+        help="Output filename (default: random_file.bin)",
+    )
     args = parser.parse_args()
 
-    num_folders = args.num_folders
-
-    create_folder_structure(num_folders)
-    print(f"Folder structure created successfully for {num_folders} folders.")
-    run_poetry_lock(num_folders)
+    create_folder_structure(
+        num_folders=args.num_folders,
+        random_file_size_mb=args.size,
+        random_file_name=args.output,
+    )
+    print(f"Folder structure created successfully for {args.num_folders} folders.")
+    run_poetry_lock(args.num_folders)
     print("Finished running 'poetry lock' for all packages.")
 
 

@@ -1,17 +1,18 @@
 import os
 import argparse
+from pathlib import Path
 
 
-def create_random_file(filename: str, size_mb: int):
+def create_random_file(path: Path, size_mb: int):
     size_bytes = size_mb * 1024 * 1024
-
-    with open(filename, "wb") as f:
-        f.write(os.urandom(size_bytes))
+    path.write_bytes(os.urandom(size_bytes))
 
 
 def main():
     parser = argparse.ArgumentParser(description="Create a file of random bytes.")
-    parser.add_argument("-s", "--size", type=int, help="Size of the file in MB")
+    parser.add_argument(
+        "-s", "--size", default=50, type=int, help="Size of the file in MB"
+    )
     parser.add_argument(
         "-o",
         "--output",
@@ -21,7 +22,7 @@ def main():
 
     args = parser.parse_args()
 
-    create_random_file(args.output, args.size)
+    create_random_file(path=Path(args.output), size_mb=args.size)
 
     file_size = os.path.getsize(args.output)
     print(f"File '{args.output}' created.")
