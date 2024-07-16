@@ -1,14 +1,13 @@
 [tool.poetry]
-name = "pkg-slow"
+name = "pkg_15"
 version = "0.1.0"
 description = ""
 authors = ["Jonathan Rayner <jonathan.j.rayner@gmail.com>"]
-packages = [{ include = "pkg_slow"}]
+packages = [{ include = "pkg_15"}]
 
 [tool.poetry.dependencies]
-python = ">=3.11 <3.13"
-torch = "^2.3.1"
-
+python = "^3.10 <3.13"
+numpy = "^1.21.2"
 
 [build-system]
 requires = ["poetry-core"]
