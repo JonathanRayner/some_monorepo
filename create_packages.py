@@ -4,13 +4,12 @@ import argparse
 from create_random_file import create_random_file
 
 
-def create_folder_structure(
-    num_folders: int, random_file_size_mb: int, random_file_name: str
-) -> None:
+def create_folder_structure(num_folders: int, random_file_size_mb: int) -> None:
     for i in range(1, num_folders + 1):
         package_name = f"pkg_{i}"
         path = Path(package_name)
         src_path = path / package_name
+        random_file_name = f"random_file_{i}.bin"
 
         # create pgk_{i}/pkg_{i}
         src_path.mkdir(exist_ok=True, parents=True)
@@ -20,7 +19,7 @@ def create_folder_structure(
 
         # Create hello.py
         (src_path / "hello.py").write_text(
-            """import numpy as np
+            f"""import numpy as np
 def say_hello():
     print('Hello from pkg_{i}')
     np.random.rand()
@@ -73,18 +72,11 @@ def main():
     parser.add_argument(
         "-s", "--size", default=50, type=int, help="Size of the file in MB"
     )
-    parser.add_argument(
-        "-o",
-        "--output",
-        default="random_file.bin",
-        help="Output filename (default: random_file.bin)",
-    )
     args = parser.parse_args()
 
     create_folder_structure(
         num_folders=args.num_folders,
         random_file_size_mb=args.size,
-        random_file_name=args.output,
     )
     print(f"Folder structure created successfully for {args.num_folders} folders.")
     run_poetry_lock(args.num_folders)
