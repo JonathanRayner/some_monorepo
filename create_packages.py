@@ -35,7 +35,8 @@ version = "0.1.0"
 description = ""
 authors = ["Jonathan Rayner <jonathan.j.rayner@gmail.com>"]
 packages = [{{ include = "{package_name}"}}]
-
+include = [{{ path = "{random_file_name}"}}]
+            
 [tool.poetry.dependencies]
 python = "^3.10 <3.13"
 numpy = "^1.21.2"
